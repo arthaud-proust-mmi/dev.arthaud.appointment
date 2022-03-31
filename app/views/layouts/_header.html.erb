@@ -1,0 +1,19 @@
+<header>
+    <nav>
+        <%= link_to "Accueil", home_url %>
+        <% if user_signed_in? %>
+            <%= link_to "Mon compte", edit_user_registration_path %>
+
+            <%= link_to "Mes rendez-vous", meets_path %>
+            <%= link_to "Prendre rendez-vous", new_meet_path %>
+            
+            <% if current_user.is_pro %>
+                <%= link_to "Mes services", services_path %>
+            <% end %>
+
+        <% else %>
+            <%= link_to 'Connexion', new_user_session_path  %>
+            <%= link_to 'Inscription', new_user_registration_path %>
+        <% end %>
+    </nav>
+</header>

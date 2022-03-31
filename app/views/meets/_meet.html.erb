@@ -1,0 +1,17 @@
+<div id="<%= dom_id meet %>">
+  <p>
+    <strong>User:</strong>
+    <%= meet.user.name %>
+  </p>
+
+  <p>
+    <strong>Service:</strong>
+    <%= link_to meet.service.title, service_path(meet.service_id) %>
+  </p>
+
+  <p>
+    <strong>Planned at:</strong>
+    <%= meet.planned_at %>
+  </p>
+
+</div>

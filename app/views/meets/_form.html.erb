@@ -1,0 +1,31 @@
+<%= form_with(model: meet) do |form| %>
+  <% if meet.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(meet.errors.count, "error") %> prohibited this meet from being saved:</h2>
+
+      <ul>
+        <% meet.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- <div> <%= form.label :user_id, style: "display: block" %> <%= form.text_field :user_id %> </div>-->
+  <!-- L'utilisateur est celui connecté -->
+  <input type="hidden" value="<%=current_user.id %>">
+
+  <div>
+    <%= form.label :service_id, style: "display: block" %>
+    <%= form.text_field :service_id %>
+  </div>
+
+  <div>
+    <%= form.label :planned_at, style: "display: block" %>
+    <%= form.datetime_field :planned_at %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
