@@ -1,19 +1,26 @@
-<header>
-    <nav>
-        <%= link_to "Accueil", home_url %>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <%= link_to "Accueil", home_url, class:"nav-link active" %>
         <% if user_signed_in? %>
-            <%= link_to "Mon compte", edit_user_registration_path %>
+            <%= link_to "Mon compte", edit_user_registration_path, class:"nav-link" %>
 
-            <%= link_to "Mes rendez-vous", my_meets_path %>
-            <%= link_to "Prendre rendez-vous", new_meet_path %>
+            <%= link_to "Mes rendez-vous", my_meets_path, class:"nav-link" %>
+            <%= link_to "Prendre rendez-vous", new_meet_path, class:"nav-link" %>
             
             <% if current_user.is_pro %>
-                <%= link_to "Mes services", services_path %>
+                <%= link_to "Mes services", services_path, class:"nav-link" %>
             <% end %>
 
         <% else %>
-            <%= link_to 'Connexion', new_user_session_path  %>
-            <%= link_to 'Inscription', new_user_registration_path %>
+            <%= link_to 'Connexion', new_user_session_path, class:"nav-link"  %>
+            <%= link_to 'Inscription', new_user_registration_path, class:"nav-link" %>
         <% end %>
-    </nav>
-</header>
+      </div>
+    </div>
+  </div>
+</nav>

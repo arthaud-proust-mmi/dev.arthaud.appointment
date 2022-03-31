@@ -1,13 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Agenda professionnel</h1>
+<h1>Mon agenda</h1>
 
-<div id="meets">
+<div class="row" id="meets">
   <% @meets.each do |meet| %>
-    <%= render meet %>
-    <p>
-      <%= link_to "Show this meet", meet %>
-    </p>
+    <div class="col-sm-4">
+      <%= render meet %>
+    </div>
   <% end %>
 </div>
 

@@ -1,14 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Services</h1>
+<h1>Mes services</h1>
 
-<div id="services">
-  <% @services.each do |service| %>
-    <%= render service %>
-    <p>
-      <%= link_to "Show this service", service %>
-    </p>
-  <% end %>
+<div class="row" id="services">
+    <% @services.each do |service| %>
+      <div class="col-sm-4">
+        <%= render service %>
+      </div>
+    <% end %>
 </div>
 
 <%= link_to "New service", new_service_path %>
