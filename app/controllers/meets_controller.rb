@@ -11,6 +11,13 @@ class MeetsController < ApplicationController
     @meets = current_user.meets
   end
 
+  # GET /pro/agenda or /pro/agenda.json
+  # retourne les dates qui concernent les services de l'utilisateur connecté (qui est pro)
+  def agenda
+    @meets = current_user.services.map { |service| service.meets }
+    @meets = @meets.flatten
+  end
+
   # GET /meets/1 or /meets/1.json
   def show
   end

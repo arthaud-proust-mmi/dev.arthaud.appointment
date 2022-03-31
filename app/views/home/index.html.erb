@@ -4,6 +4,7 @@
 <ul>
     <% if user_signed_in? %>
     <li><%= link_to 'Modifier mon compte', edit_user_registration_path %></li>
+    <li><%= link_to 'Accéder à l\'espace pro', pro_path %></li>
     <li><%= link_to 'Déconnexion', destroy_user_session_path, :method=>'delete' %></li>
     
     <% end %>

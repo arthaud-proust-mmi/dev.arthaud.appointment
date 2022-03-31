@@ -13,7 +13,7 @@
 
   <!-- <div> <%= form.label :user_id, style: "display: block" %> <%= form.text_field :user_id %> </div>-->
   <!-- L'utilisateur est celui connecté -->
-  <input type="hidden" value="<%=current_user.id %>">
+  <input type="hidden" name="service[user_id]" value="<%=current_user.id %>">
 
   <div>
     <%= form.label :title, style: "display: block" %>

@@ -6,20 +6,25 @@ class ServicesController < ApplicationController
     @services = Service.all
   end
 
-  # GET /services/1 or /services/1.json
+  # GET /pro/services or /pro/services.json
+  def index_self
+    @services = current_user.services
+  end
+
+  # GET /pro/services/1 or /pro/services/1.json
   def show
   end
 
-  # GET /services/new
+  # GET /pro/services/new
   def new
     @service = Service.new
   end
 
-  # GET /services/1/edit
+  # GET /pro/services/1/edit
   def edit
   end
 
-  # POST /services or /services.json
+  # POST /pro/services or /pro/services.json
   def create
     @service = Service.new(service_params)
 
@@ -34,7 +39,7 @@ class ServicesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /services/1 or /services/1.json
+  # PATCH/PUT /pro/services/1 or /pro/services/1.json
   def update
     respond_to do |format|
       if @service.update(service_params)
@@ -47,7 +52,7 @@ class ServicesController < ApplicationController
     end
   end
 
-  # DELETE /services/1 or /services/1.json
+  # DELETE /pro/services/1 or /pro/services/1.json
   def destroy
     @service.destroy
 

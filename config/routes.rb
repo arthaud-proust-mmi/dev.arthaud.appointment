@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :meets
-  resources :services
   devise_for :users, path: '', path_names: { 
     sign_in: '/login', 
     sign_up: '/register', 
@@ -15,10 +13,19 @@ Rails.application.routes.draw do
 
   # Rails.application.routes.draw do
   resources :meets
-  resources :services
+
+  scope '/pro' do
+    get '/', to: 'pro#index', as: :pro
+    resources :services, :except => [:index]
+    get '/services', to: 'services#index_self'
+    get '/agenda', to: 'meets#agenda'
+  end
+
+
   get '/my-meets', to: 'meets#index_self'
 
-  get '/', to: 'home#index', as: 'home'
+
+  get '/', to: 'home#index', as: :home
   # Defines the root path route ("/")
   # root "home#index"
   root "home#index"

@@ -4,7 +4,7 @@
         <% if user_signed_in? %>
             <%= link_to "Mon compte", edit_user_registration_path %>
 
-            <%= link_to "Mes rendez-vous", meets_path %>
+            <%= link_to "Mes rendez-vous", my_meets_path %>
             <%= link_to "Prendre rendez-vous", new_meet_path %>
             
             <% if current_user.is_pro %>
