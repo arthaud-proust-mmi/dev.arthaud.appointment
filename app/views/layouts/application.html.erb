@@ -12,7 +12,10 @@
 
   <body>
     <%= render "layouts/header" %>
-    <main class="container">
+    <main class="container pt-5">
+      <p style="color: green"><%= notice %></p>
+      <p style="color: green"><%= alert %></p>
+
       <%=yield %>
     <main>
     <%= render "layouts/footer" %>

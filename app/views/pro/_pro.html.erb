@@ -1,0 +1,21 @@
+<h1>Espace professionnel</h1>
+<div class="row">
+    <%= render "partials/card", 
+        title:'Mes services', 
+        lines:[
+            'Gérer les services que vous proposez'
+        ], 
+        links:[
+            {href:services_path, text:'Voir mes services'}
+        ] 
+    %>
+    <%= render "partials/card", 
+        title:'Mon agenda', 
+        lines:[
+            'Rendez-vous que les clients ont pris avec vous'
+        ], 
+        links:[
+            {href:agenda_path, text:'Voir l\'agenda'}
+        ] 
+    %>
+</div>

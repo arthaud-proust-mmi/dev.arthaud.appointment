@@ -1,21 +1,19 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
+  <div class="container-md">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav me-auto">
+        <%= link_to "Accueil", home_url, class:"nav-link " %>
+        <%= link_to "Services", all_services_path, class:"nav-link" %>
+        <%= link_to "Pro", pro_path, class:"nav-link" %>
+      </div>
       <div class="navbar-nav">
-        <%= link_to "Accueil", home_url, class:"nav-link active" %>
         <% if user_signed_in? %>
-            <%= link_to "Mon compte", edit_user_registration_path, class:"nav-link" %>
-
-            <%= link_to "Mes rendez-vous", my_meets_path, class:"nav-link" %>
-            <%= link_to "Prendre rendez-vous", new_meet_path, class:"nav-link" %>
-            
-            <% if current_user.is_pro %>
-                <%= link_to "Mes services", services_path, class:"nav-link" %>
-            <% end %>
-
+            <%= link_to current_user.name, home_url, class:"nav-link" %>
+            <!--  <%= link_to "Mon compte", edit_user_registration_path, class:"nav-link" %> -->
+            <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, class:'nav-link border-0 bg-transparent'  %>
         <% else %>
             <%= link_to 'Connexion', new_user_session_path, class:"nav-link"  %>
             <%= link_to 'Inscription', new_user_registration_path, class:"nav-link" %>

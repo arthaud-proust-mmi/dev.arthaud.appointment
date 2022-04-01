@@ -1,0 +1,29 @@
+<div class="col-4">
+    <div class="card">
+        <div class="card-body">
+            <% if defined? title %>
+                <h5 class="card-title"><%= title %></h5>
+            <% end%>
+            
+            <% if defined? subtitle %>
+                <h6 class="card-subtitle mb-3 text-muted"><%= subtitle %></h6>
+            <% end %>
+
+            <% if defined? lines %>
+                <% lines.each do |line| %>
+                    <p class="card-text"><%= line %></p>
+                <% end %>
+            <% end %>
+
+            <div class="d-flex flex-row flex-wrap gap-1">
+            <% if defined? links %>
+                <% links.each do |link| %>
+                    <a href="<%= link[:href] %>" class="btn btn-primary">
+                        <%= link[:text] %>
+                    </a>
+                <% end %>
+            <% end %>
+            </div>
+        </div>
+    </div>
+</div>

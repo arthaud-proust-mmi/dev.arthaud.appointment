@@ -1,20 +1,22 @@
-<div class="card" id="<%= dom_id service %>">
-  <div class="card-body">
-    <h5 class="card-title">
-      <%= service.title %>
-    </h5>
-    <h6 class="card-subtitle mb-2 text-muted">
-      Par <%= service.user.name %>
-    </h6>
-    <p class="card-text">
-      <%= service.description %>
-    </p>
-    <p class="card-text">
-      <%= service.price %>€
-      <small class="text-muted">
-        /<%= service.unit %>
-      </small>
-    </p>
-    <%= link_to "Voir", service, class:'card-link' %>
+<div class="col-sm-4 pb-4">
+  <div class="card" id="<%= dom_id service %>">
+    <div class="card-body">
+      <h5 class="card-title">
+        <%= service.title %>
+      </h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        Par <%= service.user.name %>
+      </h6>
+      <p class="card-text">
+        <%= service.description %>
+      </p>
+      <p class="card-text">
+        <%= service.price %>€
+        <small class="text-muted">
+          /<%= service.unit %>
+        </small>
+      </p>
+      <%= link_to "Voir", service, class:'btn btn-primary' %>
+    </div>
   </div>
 </div>

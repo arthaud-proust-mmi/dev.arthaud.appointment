@@ -1,12 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Meets</h1>
+<h1>Agenda</h1>
 
 <div class="row" id="meets">
   <% @meets.each do |meet| %>
-    <div class="col-sm-4">
-      <%= render meet %>
-    </div>
+    <%= render meet %>
   <% end %>
 </div>
 

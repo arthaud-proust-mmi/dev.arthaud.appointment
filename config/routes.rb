@@ -22,7 +22,8 @@ Rails.application.routes.draw do
   end
 
 
-  get '/my-meets', to: 'meets#index_self'
+  get '/my-meets', to: 'meets#index_self', as: 'my_meets'
+  get '/services', to: 'services#index', as: 'all_services'
 
 
   get '/', to: 'home#index', as: :home

@@ -1,0 +1,50 @@
+<h1 class="pt-5">Bienvenue</h1>
+
+<div class="row">
+
+    <% 
+        if current_user.is_pro
+            subtitle = 'Compte professionnel'
+            links = [
+                {href:edit_user_registration_path, text:'Modifier mon profil'}, 
+                {href:pro_path, text:'Accéder à l\'espace professionnel'}
+            ]
+        else 
+            subtitle = 'Compte personnel'
+            links = [
+                {href:edit_user_registration_path, text:'Modifier mon profil'}
+            ]
+        end 
+    %>
+
+    <%= render "partials/card", 
+        title:current_user.name, 
+        subtitle:subtitle, 
+        links:links
+    %>
+<div>
+
+<h4 class="pt-5">Mon espace</h4>
+<div class="row">
+    <%= render "partials/card", 
+        title:'Mes rendez-vous', 
+        lines:[
+            'Gérer les rendez-vous que vous avez pris'
+        ], 
+        links:[
+            {href:my_meets_path, text:'Voir mes rendez-vous'}
+        ] 
+    %>
+    <%= render "partials/card", 
+        title:'Prendre rendez-vous', 
+        lines:[
+            'Prendre rendez-vous pour un service'
+        ], 
+        links:[
+            {href:all_services_path, text:'Voir les services'}
+        ] 
+    %>
+</ul>
+
+
+
