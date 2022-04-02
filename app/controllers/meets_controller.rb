@@ -33,6 +33,7 @@ class MeetsController < ApplicationController
 
   # POST /meets or /meets.json
   def create
+    @service = Service.find(meet_params()[:service_id])
     @meet = Meet.new(meet_params)
 
     respond_to do |format|
@@ -40,7 +41,7 @@ class MeetsController < ApplicationController
         format.html { redirect_to meet_url(@meet), notice: "Meet was successfully created." }
         format.json { render :show, status: :created, location: @meet }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render 'services/book', status: :unprocessable_entity }
         format.json { render json: @meet.errors, status: :unprocessable_entity }
       end
     end

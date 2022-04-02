@@ -1,52 +1,47 @@
 <%= link_to "Retour aux services", customer_services_path %>
-<h1 class="pt-4">Prendez rendez-vous avec <%= @service.user.name %></h1>
+<h5>Prenez rendez-vous avec <%= @service.user.name %></h5>
 
-<div class="row pt-4">
-    <div class="col-sm-8">
 
-        <%= form_with(model: @meet) do |form| %>
-        <% if @meet.errors.any? %>
-            <div style="color: red">
-            <h2><%= pluralize(@meet.errors.count, "error") %> prohibited this meet from being saved:</h2>
-
-            <ul>
-                <% @meet.errors.each do |error| %>
-                <li><%= error.full_message %></li>
-                <% end %>
-            </ul>
-            </div>
-        <% end %>
-            <h4>Quand voulez-vous réserver?</h4>
+<%= form_with(model: @meet) do |form| %>
+    <div class="row pt-4">
+        <div class="col-sm-12 col-md-7 col-lg-4" id="datepicker-section">
+            <h3>Quand voulez-vous réserver?</h3>
         
 
             <%= form.hidden_field :user_id, value:current_user.id  %>
             <%= form.hidden_field :service_id, value:@service.id  %>
-            <label for="date" class="">Date</label>
-            <div class="col-6">
-                <div class="input-group date" id="datepicker">
-                    <%= form.text_field :planned_at, class:'form-control', id:'date' %>
-                    <span class="input-group-append">
-                        <span class="input-group-text bg-light d-block">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                    </span>
-                </div>
-            </div>
+            <%= form.hidden_field :planned_at, class:' form-control', id:'meet_planned_at' %>
+            
+            <div class="text-danger fw-bold">
+            <% if @meet.errors[:planned_at] %>
+                <% @meet.errors[:planned_at].each do |error| %>
+                    <p><%= error %></p>
+                <% end %>
+            <% end %>
+           </div> 
 
-            <%= form.submit"Prendre rendez-vous", class: 'mt-2 btn btn-primary', id:'submitBtn', disabled:true %>
-            <%= form.submit"Prendre rendez-vous", class: 'mt-2 btn btn-primary', id:'submitBtn' %>
-        <% end %>
+            <div class="mb-4" id="datepicker"></div>
+            
+
+        </div>
+        <div class="col-sm-12 col-md-5 pb-4" id="resume"  style="display: none">
+            <h3>Résumé de la réservation</h3>
+            <%= render "services/service_summary", service: @service, no_action: true %>
+
+            <div id="datepicked">
+                <span id="datepicked-date"></span>
+                <a id="datepicked-modify" class="text-decoration-none" style="cursor: pointer">Modifier</a>
+            </div> 
+            <%= form.submit "Confirmer", class: 'mt-4 btn btn-primary', id:'submitBtn', disabled:true %>
+
+        </div>
     </div>
-    <div class="col-sm-4 pb-4">
-        <h4>Résumé du service</h4>
-        <%= render "service_summary", service: @service, no_action: true %>
-    </div>
-</div>
+    <% end %>
 
 
 <script>
 (()=>{
-    const fetchDatesUrl = "<%= taken_dates_service_path %>.json";
+    const fetchDatesUrl = "<%= taken_dates_service_path(@service.id) %>.json";
 
     const calendar = document.getElementById('calendar');
 
@@ -85,15 +80,31 @@
         };
 
         const datePickerParams = {
-            todayHighlight: true,
+            todayHighlight: false,
             language: 'fr',
-            datesDisabled
+            datesDisabled,
+            templates: {
+                leftArrow: '<i class="fa fa-angle-left"></i>',
+                rightArrow: '<i class="fa fa-angle-right"></i>'
+            }
         };
 
         $('#datepicker').datepicker(datePickerParams);
 
+        $('#datepicked-modify').on('click', function(e) {
+            e.preventDefault();
+            $('#datepicker-section').show()
+            $('#resume').hide()
+        })
+
         $('#datepicker').on('changeDate', function() {
+            let picked = $('#datepicker').datepicker('getFormattedDate');
+            $('#meet_planned_at').val(picked);
+            $('#datepicked-date').text("Le "+picked)
+
             $('#submitBtn').removeAttr('disabled')
+            $('#datepicker-section').hide()
+            $('#resume').show()
         });
     });
 })()
@@ -102,8 +113,12 @@
 
 
 <style>
+    .datepicker-days > table {
+        width: 100%
+    }
     .datepicker.datepicker-inline {
         width: auto !important;
+        border: 1px solid #eee;
     }
     .datepicker-switch {
         width: auto !important;
@@ -111,11 +126,14 @@
     }
 
     .datepicker td, .datepicker th {
-        width: auto !important;
         height: auto !important;
-        padding: 0.6rem 1rem;
+        // padding: 0.6rem 1rem;
+        padding: 0.5rem 0;
+        width: calc(100% / 7) !important
     }
 
+    .day {
+    }
     .day.today {
         background: #fde19a;
         background-image: none !important;
@@ -123,5 +141,8 @@
     .day.active {
         background: #04c;
         background-image: none !important;
+    }
+    .day.disabled.disabled-date {
+        background: #eee;
     }
 </style>
