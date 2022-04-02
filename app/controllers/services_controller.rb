@@ -11,6 +11,15 @@ class ServicesController < ApplicationController
     @services = current_user.services
   end
 
+  def book
+    @meet = Meet.new
+    set_service
+  end
+
+  def taken_dates
+    set_service
+  end
+
   # GET /pro/services/1 or /pro/services/1.json
   def show
   end

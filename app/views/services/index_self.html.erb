@@ -1,10 +1,10 @@
 
 <h1>Mes services</h1>
-<%= link_to "New service", new_service_path, class:"btn btn-primary" %>
+<%= link_to "Nouveau service", new_service_path, class:"btn btn-primary" %>
 
 <div class="mt-3 row" id="services">
     <% @services.each do |service| %>
-        <%= render service %>
+        <%= render service, personal:true %>
     <% end %>
 </div>
 

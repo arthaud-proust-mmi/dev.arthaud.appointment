@@ -8,26 +8,24 @@ Rails.application.routes.draw do
     confirmation: 'verification', 
     unlock: 'unblock' 
   }, :controllers => { registrations: 'users/registrations' }
-  # devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_up: 'register', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'registerwtf' }
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Rails.application.routes.draw do
   resources :meets
 
   scope '/pro' do
     get '/', to: 'pro#index', as: :pro
-    resources :services, :except => [:index]
+    resources :services, except: [:index]
     get '/services', to: 'services#index_self'
     get '/agenda', to: 'meets#agenda'
   end
 
 
-  get '/my-meets', to: 'meets#index_self', as: 'my_meets'
-  get '/services', to: 'services#index', as: 'all_services'
-
+  get '/my-meets', to: 'meets#index_self', as: :my_meets
+  
+  get '/services', to: 'services#index', as: :customer_services
+  get '/services/:id', to: 'services#show', as: :customer_service
+  get '/services/:id/book', to: 'services#book', as: :customer_book_service
+  get '/services/:id/taken-dates', to: 'services#taken_dates', as: :taken_dates_service
 
   get '/', to: 'home#index', as: :home
-  # Defines the root path route ("/")
-  # root "home#index"
   root "home#index"
 end

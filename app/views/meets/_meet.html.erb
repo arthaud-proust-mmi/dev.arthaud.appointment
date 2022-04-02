@@ -1,13 +1,15 @@
-<div class="col-sm-4 mb-4">
+<div class="col-sm-6 col-lg-4 mb-4">
   <div class="card" id="<%= dom_id meet %>">
     <div class="card-body">
       <h5 class="card-title">
         <%= meet.planned_at %>
       </h5>
       <h6 class="card-subtitle mb-2 text-muted">
-        <%= link_to meet.service.title, service_path(meet.service_id) %>
+        Service <%= link_to meet.service.title, service_path(meet.service_id) %>
       </h6>
-      <p class="card-text"><%= meet.user.name %></p>
+      <% if not defined? personal %>
+        <p class="card-text"><%= meet.user.name %></p>
+      <% end %>
       <%= link_to "Voir", meet, class:'btn btn-primary' %>
     </div>
   </div>

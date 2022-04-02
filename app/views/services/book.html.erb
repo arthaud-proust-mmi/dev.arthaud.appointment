@@ -1,0 +1,127 @@
+<h1>Prendez rendez-vous avec <%= @service.user.name %></h1>
+
+
+
+<div class="row pt-4">
+    <div class="col-sm-8">
+
+        <%= form_with(model: @meet) do |form| %>
+        <% if @meet.errors.any? %>
+            <div style="color: red">
+            <h2><%= pluralize(@meet.errors.count, "error") %> prohibited this meet from being saved:</h2>
+
+            <ul>
+                <% @meet.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+                <% end %>
+            </ul>
+            </div>
+        <% end %>
+            <h4>Quand voulez-vous réserver?</h4>
+        
+
+            <%= form.hidden_field :user_id, value:current_user.id  %>
+            <%= form.hidden_field :service_id, value:@service.id  %>
+            <label for="date" class="">Date</label>
+            <div class="col-6">
+                <div class="input-group date" id="datepicker">
+                    <%= form.text_field :planned_at, class:'form-control', id:'date' %>
+                    <span class="input-group-append">
+                        <span class="input-group-text bg-light d-block">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <%= form.submit"Prendre rendez-vous", class: 'mt-2 btn btn-primary', id:'submitBtn', disabled:true %>
+        <% end %>
+    </div>
+    <div class="col-sm-4 pb-4">
+        <h4>Résumé du service</h4>
+        <%= render "service_summary", service: @service, no_action: true %>
+    </div>
+</div>
+
+
+<script>
+(()=>{
+    const fetchDatesUrl = "<%= taken_dates_service_path %>.json";
+
+    const calendar = document.getElementById('calendar');
+
+    fetch(fetchDatesUrl).then(function(response) {
+    return response.json();
+    })
+    .then(function(takenDatesObjs) {
+        console.log(takenDatesObjs);
+        const datesDisabled = [];
+        for(let i=0; i<=takenDatesObjs.length-1; i++) {
+            console.log(takenDatesObjs[i].planned_at);
+            const d = new Date(takenDatesObjs[i].planned_at);
+            const day = d.getDate().toString().padStart(2, "0")
+            const month = (d.getMonth()+1).toString().padStart(2, "0")
+            const year = d.getFullYear()
+            const formated = `${day}/${month}/${year}`;
+
+            console.log(formated)
+            datesDisabled.push(formated)
+        }
+
+        console.log(datesDisabled)
+
+
+        $.fn.datepicker.dates['fr'] = {
+            days: ["Dimanche", "Lundi", "Madri", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+            daysShort: ["Di", "Lun", "Mar", "Mer", "Mar", "Jeu", "Sam"],
+            daysMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+            months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+            monthsShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Ju", "Jui", "Aoû", "Sep", "Oct", "Nov", "Dec"],
+            today: "Aujourd'hui",
+            clear: "Effacer",
+            format: "dd/mm/yyyy",
+            titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+            weekStart: 1
+        };
+
+        const datePickerParams = {
+            todayHighlight: true,
+            language: 'fr',
+            datesDisabled
+        };
+
+        $('#datepicker').datepicker(datePickerParams);
+
+        $('#datepicker').on('changeDate', function() {
+            $('#submitBtn').removeAttr('disabled')
+        });
+    });
+})()
+
+</script>
+
+
+<style>
+    .datepicker.datepicker-inline {
+        width: auto !important;
+    }
+    .datepicker-switch {
+        width: auto !important;
+        min-width: 145px;
+    }
+
+    .datepicker td, .datepicker th {
+        width: auto !important;
+        height: auto !important;
+        padding: 0.6rem 1rem;
+    }
+
+    .day.today {
+        background: #fde19a;
+        background-image: none !important;
+    }
+    .day.active {
+        background: #04c;
+        background-image: none !important;
+    }
+</style>
