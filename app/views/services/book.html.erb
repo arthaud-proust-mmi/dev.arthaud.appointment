@@ -4,8 +4,9 @@
 
 <%= form_with(model: @meet) do |form| %>
     <div class="row pt-4">
-        <div class="col-sm-12 col-md-7 col-lg-4" id="datepicker-section">
-            <h3>Quand voulez-vous réserver?</h3>
+        
+        <div class="col-sm-12 col-md-7 col-lg-7 d-md-block" id="datepicker-section">
+            <h3>Quand réserver?</h3>
         
 
             <%= form.hidden_field :user_id, value:current_user.id  %>
@@ -24,17 +25,20 @@
             
 
         </div>
-        <div class="col-sm-12 col-md-5 pb-4" id="resume"  style="display: none">
-            <h3>Résumé de la réservation</h3>
+        
+        <div class="col-sm-12 col-md-5 col-lg-4 offset-lg-1 pb-4" id="resume">
+            <h3 class="pb-2">Résumé</h3>
             <%= render "services/service_summary", service: @service, no_action: true %>
 
-            <div id="datepicked">
-                <span id="datepicked-date"></span>
-                <a id="datepicked-modify" class="text-decoration-none" style="cursor: pointer">Modifier</a>
+            <div id="datepicked" class="mt-2 bg-light p-3 rounded">
+                <h5>Date de réservation</h5>
+                <span id="datepicked-date">Aucune date choisie</span>
+                <a id="datepicked-modify" class="d-none d-md-none text-decoration-none" style="cursor: pointer">Modifier</a>
             </div> 
-            <%= form.submit "Confirmer", class: 'mt-4 btn btn-primary', id:'submitBtn', disabled:true %>
+            <%= form.submit "Confirmer", class: 'col-12 mt-2 btn btn-secondary', id:'submitBtn', disabled:true %>
 
         </div>
+
     </div>
     <% end %>
 
@@ -93,8 +97,8 @@
 
         $('#datepicked-modify').on('click', function(e) {
             e.preventDefault();
-            $('#datepicker-section').show()
-            $('#resume').hide()
+            $('#datepicker-section').removeClass('d-none')
+            $('#datepicked-modify').addClass('d-none')
         })
 
         $('#datepicker').on('changeDate', function() {
@@ -102,9 +106,9 @@
             $('#meet_planned_at').val(picked);
             $('#datepicked-date').text("Le "+picked)
 
-            $('#submitBtn').removeAttr('disabled')
-            $('#datepicker-section').hide()
-            $('#resume').show()
+            $('#submitBtn').removeAttr('disabled').addClass('btn-primary').removeClass('btn-secondary');
+            $('#datepicker-section').addClass('d-none')
+            $('#datepicked-modify').removeClass('d-none')
         });
     });
 })()
