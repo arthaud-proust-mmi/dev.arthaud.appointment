@@ -12,4 +12,35 @@
  *
  */
 
+$primary: #2e6de3;
+$secondary:  #c0c3cb;
+$body-bg: #e7e8ec;
+$input-border-color: #adb5bd;
+
+$font-family-sans-serif:
+    'Montserrat',
+    // Cross-platform generic font family (default user interface font)
+    system-ui,
+    // Safari for macOS and iOS (San Francisco)
+    -apple-system,
+    // Windows
+    "Segoe UI",
+    // Android
+    Roboto,
+    // Basic web fallback
+    "Helvetica Neue", Arial,
+    // Linux
+    "Noto Sans",
+    "Liberation Sans",
+    // Sans serif fallback
+    sans-serif,
+    // Emoji fonts
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+$font-family-serif:
+    Cardo;
+
+.font-serif {
+    font-family: $font-family-serif;
+}
 @import "bootstrap";

@@ -6,6 +6,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -18,9 +22,9 @@
     
   </head>
 
-  <body>
+  <body class="min-vh-100">
     <%= render "layouts/header" %>
-    <main class="container pt-2 pt-md-5">
+    <main class="h-100 container pt-2 pt-md-5">
       <p style="color: green"><%= notice %></p>
       <p style="color: green"><%= alert %></p>
 
