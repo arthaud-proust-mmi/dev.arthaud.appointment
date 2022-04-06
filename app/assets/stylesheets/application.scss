@@ -43,4 +43,15 @@ $font-family-serif:
 .font-serif {
     font-family: $font-family-serif;
 }
+
+.btn:hover {
+    background-color: rgba(0,0,0,0.07);
+}
+
 @import "bootstrap";
+
+
+.nav-link:hover {
+    text-decoration: underline !important;
+}
+

@@ -1,48 +1,53 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<%= render layout: '/layouts/auth', 
+    locals: {
+        title: 'Modifier mon profil'
+} do %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
+        <div class="mb-3 col-12">
+            <%= f.label :name, 'Nom', class:'form-label' %>
+            <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+        </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
+        <div class="mb-3 col-12">
+            <%= f.label :email, 'E-mail', class:'form-label' %>
+            <%= f.email_field :email, autocomplete: "email", class: 'form-control' %>
+        </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Email en attente de confirmation pour: <%= resource.unconfirmed_email %></div>
+        <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+        <div class="mb-3 col-12">
+            <div class="d-flex flex-row justify-content-between">
+                <%= f.label :password, 'Mot de passe', class:'form-label' %>
+                <% if @minimum_password_length %>
+                    <em><%= @minimum_password_length %> caractères minimum</em>
+                <% end %>
+            </div>
+            <%= f.password_field :password, autocomplete: "new-password", class:'form-control' %>
+            <span class="text-muted">Laissez vide si vous ne voulez pas le changer</span>
+        </div>
+
+        <div class="mb-3 col-12">
+            <%= f.label :password_confirmation, 'Confirmer le mot de passe', class:'form-label' %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'form-control' %>
+        </div>
+
+        <div class="mb-3 col-12">
+            <%= f.label :current_password, 'Mot de passe actuel', class:'form-label' %>
+            <%= f.password_field :current_password, autocomplete: "current-password", class:'form-control' %>
+            <span class="text-muted">Nécessaire pour changer de mot de passe</span>
+        </div>
+
+        <div class="actions">
+            <%= f.submit "Update", class:'mb-2 col-12 btn btn-primary' %>
+            <%= link_to "Retour", home_path, class:'btn col-12' %>
+        </div>
     <% end %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
+    <!-- <h3 class="mt-5">Zone dangereuse</h3> -->
+    <!-- <%= button_to "Supprimer mon compte", registration_path(resource_name), class:'btn btn-danger', data: { confirm: "Êtes-vous sûr?" }, method: :delete %>-->
 <% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
