@@ -21,26 +21,50 @@
         <% end %>
 
         <div class="mb-3 col-12">
-            <div class="d-flex flex-row justify-content-between">
-                <%= f.label :password, 'Mot de passe', class:'form-label' %>
-                <% if @minimum_password_length %>
-                    <em><%= @minimum_password_length %> caractères minimum</em>
-                <% end %>
+            <%= f.check_box :is_pro, class:'form-check-input' %>
+            <%= f.label :is_pro, 'Vous être professionnel', class:'form-checks-label' %>
+        </div>
+
+        <div class="accordion mb-3" id="accordionPassword">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePassword" aria-expanded="false" aria-controls="collapsePassword">
+                        Modifier le mot de passe
+                    </button>
+                </h2>
+                <div id="collapsePassword" class=" accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionPassword">
+                    <div class="accordion-body">
+                        
+                        <div class="mb-3 col-12">
+                            <div class="d-flex flex-row justify-content-between">
+                                <%= f.label :password, 'Mot de passe', class:'form-label' %>
+                                <% if @minimum_password_length %>
+                                    <em><%= @minimum_password_length %> caractères minimum</em>
+                                <% end %>
+                            </div>
+                            <%= f.password_field :password, autocomplete: "new-password", class:'form-control' %>
+                        </div>
+
+                        <div class="mb-3 col-12">
+                            <%= f.label :password_confirmation, 'Confirmer le mot de passe', class:'form-label' %>
+                            <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'form-control' %>
+                        </div>
+
+                        <div class="mb-3 col-12">
+                            <%= f.label :current_password, 'Mot de passe actuel', class:'form-label' %>
+                            <%= f.password_field :current_password, autocomplete: "current-password", class:'form-control' %>
+                            <span class="text-muted">Nécessaire pour changer de mot de passe</span>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            <%= f.password_field :password, autocomplete: "new-password", class:'form-control' %>
-            <span class="text-muted">Laissez vide si vous ne voulez pas le changer</span>
         </div>
 
-        <div class="mb-3 col-12">
-            <%= f.label :password_confirmation, 'Confirmer le mot de passe', class:'form-label' %>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'form-control' %>
-        </div>
+        
 
-        <div class="mb-3 col-12">
-            <%= f.label :current_password, 'Mot de passe actuel', class:'form-label' %>
-            <%= f.password_field :current_password, autocomplete: "current-password", class:'form-control' %>
-            <span class="text-muted">Nécessaire pour changer de mot de passe</span>
-        </div>
+
+        
 
         <div class="actions">
             <%= f.submit "Mettre à jour", class:'mb-2 col-12 btn btn-primary' %>
