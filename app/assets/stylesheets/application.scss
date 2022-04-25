@@ -55,3 +55,22 @@ $font-family-serif:
     text-decoration: underline !important;
 }
 
+
+// @include media-breakpoint-up(lg) { 
+//     div#home-row {
+//         overflow: hidden;
+//         &::after {
+//             content: ' ';
+//             position: absolute;
+//             height: var(--width);
+//             width: var(--width);
+//             background: #fff;
+//             border-radius: 0 100% 100% 0;
+//             z-index: -1;
+//             top: 50%;
+//             left: 0;
+//             transform: translate(-30%, -50%);
+//             --width: 100vw;
+//         }
+//     }
+// }
