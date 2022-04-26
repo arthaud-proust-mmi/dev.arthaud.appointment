@@ -1,4 +1,6 @@
-<%= link_to "Retour à mes services", services_path %>
-<h1 class="pt-2">Éditer un service</h1>
-
-<%= render "form", service: @service %>
+<%= render layout: '/layouts/form', 
+    locals: {
+        title: 'Éditer un service'
+} do %>
+    <%= render "form", service: @service %>
+<% end %>

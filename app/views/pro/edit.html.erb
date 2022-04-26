@@ -1,0 +1,44 @@
+<%= render layout: '/layouts/form', 
+    locals: {
+        title: 'Modifier mon profil'
+} do %>
+
+    <p>Gardez à jour les informations visibles sur votre profil professionnel</p>
+
+    <%= form_with(model: @user, url: update_pro_path) do |f| %>
+        <div class="mb-3 col-12">
+            <%= f.label :name, 'Nom', class:'form-label' %>
+            <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3 col-12">
+            <%= f.label :profession, 'Profession', class:'form-label' %>
+            <%= f.text_field :profession, class: 'form-control', placeholder: 'Photographe, coiffeur...'%>
+        </div>
+
+        <div class="mb-3 col-12">
+            <%= f.label :description, 'Description', class:'form-label' %>
+            <%= f.text_area :description, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3 col-12">
+            <%= f.label :contact, 'Contact', class:'form-label' %>
+            <%= f.text_field :contact, class: 'form-control', placeholder: 'Téléphone ou email' %>
+        </div>
+
+        <div class="mb-3 col-12">
+            <%= f.label :site, 'Site web', class:'form-label' %>
+            <div class="input-group">
+                <span class="input-group-text" id="basic-addon1">https://</span>
+                <%= f.text_field :site, class: 'form-control', placeholder: 'example.com' %>
+            </div>
+        </div>
+
+        
+
+        <div class="actions">
+            <%= f.submit "Mettre à jour", class:'mb-2 col-12 btn btn-primary' %>
+            <%= link_to "Retour", pro_path, class:'mb-2 btn col-12' %>
+        </div>
+    <% end %>
+<% end %>

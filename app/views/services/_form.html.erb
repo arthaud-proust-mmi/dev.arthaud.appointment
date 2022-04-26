@@ -5,7 +5,7 @@
     <input type="hidden" name="service[user_id]" value="<%=current_user.id %>">
 
 
-    <div class="mb-3 col-4">
+    <div class="mb-3 col-12">
         <%= form.label :title, 'Titre', class:'form-label' %>
         <%= form.text_field :title, class: 'form-control'+(@service.errors[:title].length>0?' border-danger':'') %>
         <div class="text-danger fw-bold">
@@ -17,7 +17,7 @@
         </div> 
     </div>
 
-    <div class="mb-3 col-4">
+    <div class="mb-3 col-12">
         <%= form.label :description, 'Description', class:'form-label' %>
         <%= form.text_area :description, rows:3, class: 'form-control'+(@service.errors[:description].length>0?' border-danger':'') %>
         <div class="text-danger fw-bold">
@@ -30,7 +30,7 @@
     </div>
 
     <div class="mb-3 row">
-        <div class="col-4">
+        <div class="col-12">
             <%= form.label :price, 'Prix', class:'form-label' %>
             <div class="input-group">
                 <%= form.number_field :price, class: 'form-control'+(@service.errors[:price].length>0?' border-danger':'') %>
@@ -56,7 +56,8 @@
         </div>
     </div>
     <div>
-        <%= form.submit "Mettre à jour", class:'btn btn-primary' %>
+        <%= form.submit "Mettre à jour", class:'mb-2 btn btn-primary col-12' %>
+        <%= link_to "Retour", pro_path, class:'mb-2 btn col-12' %>
     </div>
 <% end %>
 
@@ -65,7 +66,7 @@
     <div class="pt-5">
         <strong>Zone à risque</strong>
         <% if @service.persisted? %>
-            <%= button_to "Supprimer le service", @service, method: :delete, class:'btn btn-outline-danger' %> 
+            <%= button_to "Supprimer le service", @service, method: :delete, class:'btn btn-outline-danger col-12' %> 
         <% end %>
     </div>
 <% end %>

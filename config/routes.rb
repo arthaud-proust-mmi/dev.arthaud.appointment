@@ -13,9 +13,13 @@ Rails.application.routes.draw do
 
   scope '/pro' do
     get '/', to: 'pro#index', as: :pro
+    get '/edit', to: 'pro#edit', as: :edit_pro
+    patch '/edit', to: 'pro#update', as: :update_pro
     resources :services, except: [:index]
     get '/services', to: 'services#index_self', as: :services_self
     get '/agenda', to: 'meets#agenda', as: :agenda
+    get '/:id', to: 'pro#show', as: :show_pro
+
   end
 
 
@@ -25,6 +29,7 @@ Rails.application.routes.draw do
   get '/services/:id', to: 'services#show', as: :customer_service
   get '/services/:id/book', to: 'services#book', as: :customer_book_service
   get '/services/:id/taken-dates', to: 'services#taken_dates', as: :taken_dates_service
+
 
   get '/', to: 'home#index', as: :home
   get '/account', to: 'home#show', as: :account

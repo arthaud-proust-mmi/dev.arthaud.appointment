@@ -1,4 +1,7 @@
-<%= link_to "Retour à mes services", services_path %>
-<h1 class="pt-2">Créer un service</h1>
-
-<%= render "form", service: @service %>
+<%= render layout: '/layouts/form', 
+    locals: {
+        title: 'Créer un service',
+        preprend: (link_to "Retour à l'espace pro", pro_path, class:"mb-3")
+} do %>
+    <%= render "form", service: @service %>
+<% end %>

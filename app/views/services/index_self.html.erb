@@ -4,7 +4,9 @@
 
 <div class="mt-3 row" id="services">
     <% @services.each do |service| %>
-        <%= render service, personal:true %>
+        <div class="col-sm-6 col-lg-4  pb-4">
+            <%= render service, own:true, hide_user:true %>
+        </div>
     <% end %>
 </div>
 

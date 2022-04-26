@@ -7,7 +7,7 @@
             <div class="navbar-nav me-auto">
                 <%= link_to ENV['app_name'], home_url, class: class_names('nav-link', { active: current_page?(root_path) }) %>
                 <%= link_to "Services", customer_services_path, class: class_names('nav-link', { active: current_page?(customer_services_path) }) %>
-                <%= link_to "Pro", pro_path, class: class_names('nav-link', { active: current_page?(pro_path) }) %>
+                <%= link_to "Espace Pro", pro_path, class: class_names('nav-link', { active: current_page?(pro_path) }) %>
             </div>
             <div class="navbar-nav">
                 <% if user_signed_in? %>
@@ -16,8 +16,8 @@
                             <%= current_user.name %>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <%= link_to "Mon compte", account_path, class:"nav-link" %>
-                            <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, class:'nav-link border-0 bg-transparent'  %>
+                            <%= link_to "Mon compte", account_path, class:"dropdown-item" %>
+                            <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, class:'dropdown-item border-0 '  %>
                         </div>
                     </div>
                 <% else %>

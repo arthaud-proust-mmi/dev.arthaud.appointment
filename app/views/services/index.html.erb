@@ -2,6 +2,8 @@
 
 <div class="row" id="services">
     <% @services.each do |service| %>
-        <%= render service %>
+        <div class="col-sm-6 col-lg-4  pb-4">
+            <%= render service %>
+        </div>
     <% end %>
 </div>

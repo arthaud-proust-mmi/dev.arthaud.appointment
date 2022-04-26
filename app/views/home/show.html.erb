@@ -1,18 +1,17 @@
 <h1 class="pt-5">Bienvenue, <%= current_user.name %></h1>
 
 <div class="row">
-
     <% 
         if current_user.is_pro
             subtitle = 'Compte professionnel'
             links = [
-                {href:edit_user_registration_path, text:'Modifier mon profil'}, 
+                {href:edit_user_registration_path, text:'Modifier mon compte'}, 
                 {href:pro_path, text:'Accéder à l\'espace professionnel'}
             ]
         else 
             subtitle = 'Compte personnel'
             links = [
-                {href:edit_user_registration_path, text:'Modifier mon profil'}
+                {href:edit_user_registration_path, text:'Modifier mon compte'}
             ]
         end 
     %>
