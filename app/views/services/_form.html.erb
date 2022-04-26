@@ -60,9 +60,12 @@
     </div>
 <% end %>
 
-<div class="pt-5">
-    <strong>Zone à risque</strong>
-    <% if @service.persisted? %>
-        <%= button_to "Supprimer le service", @service, method: :delete, class:'btn btn-outline-danger' %> 
-    <% end %>
-</div>
+
+<% if @service.persisted? %>
+    <div class="pt-5">
+        <strong>Zone à risque</strong>
+        <% if @service.persisted? %>
+            <%= button_to "Supprimer le service", @service, method: :delete, class:'btn btn-outline-danger' %> 
+        <% end %>
+    </div>
+<% end %>

@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   scope '/pro' do
     get '/', to: 'pro#index', as: :pro
     resources :services, except: [:index]
-    get '/services', to: 'services#index_self'
-    get '/agenda', to: 'meets#agenda'
+    get '/services', to: 'services#index_self', as: :services_self
+    get '/agenda', to: 'meets#agenda', as: :agenda
   end
 
 
@@ -27,5 +27,6 @@ Rails.application.routes.draw do
   get '/services/:id/taken-dates', to: 'services#taken_dates', as: :taken_dates_service
 
   get '/', to: 'home#index', as: :home
+  get '/account', to: 'home#show', as: :account
   root "home#index"
 end
