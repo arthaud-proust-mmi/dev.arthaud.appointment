@@ -1,5 +1,26 @@
 # frozen_string_literal: true
 
+# modification from tuto 
+# at https://medium.com/@nejdetkadir/how-to-use-devise-gem-with-ruby-on-rails-7-33b89f9a9c13
+
+#! config/initializers/devise.rb
+
+#! Create custom failure for turbo
+class TurboFailureApp < Devise::FailureApp
+    def respond
+      if request_format == :turbo_stream
+        redirect
+      else
+        super
+      end
+    end
+   
+    def skip_format?
+      %w(html turbo_stream */*).include? request_format.to_s
+    end
+end
+
+
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from
@@ -18,8 +39,9 @@ Devise.setup do |config|
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
-  # config.parent_controller = 'DeviseController'
-
+#   config.parent_controller = 'DeviseController'
+#   config.parent_controller = 'Users::DeviseController'
+#   config.parent_controller = 'TurboController'
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
@@ -264,6 +286,7 @@ Devise.setup do |config|
   #
   # The "*/*" below is required to match Internet Explorer requests.
   # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = ['*/*', :html, :turbo_stream]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
@@ -277,10 +300,11 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
-  # config.warden do |manager|
-  #   manager.intercept_401 = false
-  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
-  # end
+  config.warden do |manager|
+    manager.failure_app = TurboFailureApp
+    # manager.intercept_401 = false
+    # manager.default_strategies(scope: :user).unshift :some_external_strategy
+  end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine

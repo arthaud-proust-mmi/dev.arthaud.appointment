@@ -1,3 +1,4 @@
+<% @noAlert = true %>
 <div class="row">
     <% if defined? img %>
     <div class="d-none d-lg-block col-lg-5 offset-xl-1 coll-xl-5">
@@ -10,7 +11,7 @@
     <% end %>
     <div class="pb-5 offset-1 col-10 offset-sm-2 col-sm-8 offset-md-3 col-md-6 col-lg-5 offset-lg-1 col-xl-4 d-flex flex-column justify-content-center">
         <h1 class="font-serif pb-2"><%= title %></h1>
-
+        <%= render "layouts/alerts" %>
         <%= yield %>
     </div>
 </div>
