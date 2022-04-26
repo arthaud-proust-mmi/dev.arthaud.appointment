@@ -30,13 +30,13 @@
     </div>
 
     <div class="mb-3 row">
-        <div class="mb-3 col-4">
+        <div class="col-4">
             <%= form.label :price, 'Prix', class:'form-label' %>
-            <div class="input-group mb-3">
+            <div class="input-group">
                 <%= form.number_field :price, class: 'form-control'+(@service.errors[:price].length>0?' border-danger':'') %>
                 <span class="input-group-text">€</span>
                 <%= form.select :unit, 
-                    ['unité', 'mois', 'heure', 'an', 'jour', 'photo', 'document'].map { |string| ['Par '+string, string] },
+                    ['rendez-vous','unité', 'mois', 'heure', 'an', 'jour', 'photo', 'document'].map { |string| ['Par '+string, string] },
                     {},
                     {class: 'form-control'+(@service.errors[:unit].length>0?' border-danger':'')}
                 %>
@@ -55,11 +55,14 @@
             </div> 
         </div>
     </div>
-
     <div>
-        <%= form.submit class:'btn btn-primary' %>
-        <% if @service.persisted? %>
-            <%= button_to "Destroy this service", @service, method: :delete, class:'btn btn-danger' %> 
-        <% end %>
+        <%= form.submit "Mettre à jour", class:'btn btn-primary' %>
     </div>
 <% end %>
+
+<div class="pt-5">
+    <strong>Zone à risque</strong>
+    <% if @service.persisted? %>
+        <%= button_to "Supprimer le service", @service, method: :delete, class:'btn btn-outline-danger' %> 
+    <% end %>
+</div>
