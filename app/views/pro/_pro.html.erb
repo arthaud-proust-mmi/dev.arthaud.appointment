@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-12">
-        <h1 class="mb-2">Espace pro</h1>
+        <h1 class="mb-2">Espace Pro</h1>
         <%= link_to "Modifier mon profil", edit_pro_path, class:"mb-2 btn btn-primary" %>
-        <%= link_to "Voir en tant que particulier", show_pro_path(current_user.id), class:"mb-2 btn btn-primary" %>
+        <%= link_to "Voir en tant que particulier", show_pro_path(current_user.id), class:"mb-2 btn btn-secondary" %>
     </div>
-    <div class="col-4 mb-5">
+    <div class="col-md-4 mb-2">
         <div class="card">
             <div class="card-body">
                 <h2 class="h5 card-title"><%= @user.name %></h2>
@@ -19,7 +19,7 @@
 
         </div>
     </div>
-    <div class="col-8 mb-5">
+    <div class="col-md-8 mb-2">
         <div class="card">
             <div class="card-body">
                 <h4 class="h5 card-title">Description</h4>
@@ -28,13 +28,13 @@
         </div>
     </div>
 
-    <div class="col-12 mb-5">
+    <div class="col-12 mt-5">
         <h2 class="mb-2">Mon agenda</h2>
         <p>Rendez-vous que les clients ont pris avec vous</p>
         <%= link_to "Voir l\'agenda", agenda_path, class:"mb-2 btn btn-primary" %>
     </div>
 
-    <div class="col-12">
+    <div class="col-12 mt-5">
         <h2 class="mb-2">Mes services</h2>
         <%= link_to "Nouveau service", new_service_path, class:"mb-2 btn btn-primary" %>
     </div>

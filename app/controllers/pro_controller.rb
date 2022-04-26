@@ -36,7 +36,7 @@ class ProController < ApplicationController
     private
         # Use callbacks to share common setup or constraints between actions.
         def set_user
-            @user = User.find_by(id: params[:id], is_pro: true)
+            @user = User.find_by!(id: params[:id], is_pro: true)
         end
 
         # Only allow a list of trusted parameters through.
