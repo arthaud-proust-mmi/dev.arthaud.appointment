@@ -1,6 +1,6 @@
 <div class="row">
     <h1 class="col-12">Rendez-vous</h1>
-    <div class="col-md-6">
+    <div class="col-md-6 mb-2">
         <div class="card">
             <% if @meet.is_canceled %>
                 <div class="card-header bg-danger text-light">
@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="col-md-5">
+    <div class="col-md-5 mb-2">
         <% if current_user && current_user.id == @meet.service.user.id %>
             <%= render 'users/client_card', user: @meet.user %>
         <% else %>
