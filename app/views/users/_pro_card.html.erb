@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Professionnel</h5>
-        <%= link_to user.name, show_pro_path(user) %>
+        <%= link_to user.name, show_pro_path(user.slug) %>
         <% if current_user && current_user.id == user.id %>
             (vous)
         <% end %>

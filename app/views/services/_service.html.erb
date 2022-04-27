@@ -5,7 +5,7 @@
         </h5>
         <% if not defined? hide_user %>
         <h6 class="card-subtitle mb-2 text-muted">
-            Par <%= link_to service.user.name, show_pro_path(service.user) %>
+            Par <%= link_to service.user.name, show_pro_path(service.user.slug) %>
         </h6>
         <% end %>
         <p class="card-text">

@@ -7,9 +7,9 @@ class User < ApplicationRecord
     has_many :meets
     has_many :pro_meets, through: :services, source: :meets
 
+    require 'uri'
 
     def adress_to_maps
-        require 'uri'
         uri = URI.parse('https://www.google.com/maps/search/')
         uri.query = URI.encode_www_form(
             'api' => 1,

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :services, except: [:index]
     get '/agenda', to: 'agenda#index', as: :agenda
     get '/agenda/old', to: 'agenda#index_old', as: :agenda_old
-    get '/:id', to: 'pro#show', as: :show_pro
+    get '/:slug', to: 'pro#show', as: :show_pro
 
   end
 

@@ -8,7 +8,7 @@ class ProController < ApplicationController
     end
 
     def show
-        @user = User.find_by!(id: params[:id], is_pro: true)
+        @user = User.find_by!(slug: params[:slug], is_pro: true)
     end
 
     def edit
@@ -35,6 +35,6 @@ class ProController < ApplicationController
 
         # Only allow a list of trusted parameters through.
         def user_params
-            params.require(:user).permit(:name, :profession, :description, :site, :contact, :adress)
+            params.require(:user).permit(:name, :profession, :description, :site, :contact, :adress).merge(slug: params.require(:user)[:name].parameterize)
         end
 end 
