@@ -23,27 +23,13 @@
     %>
 <div>
 
-<h4 class="pt-5">Mon espace</h4>
+<h2 class="pt-5">Prochains rendez-vous</h2>
+<%= link_to 'Tout voir', my_meets_path, class: 'mb-3 btn btn-secondary' %>
 <div class="row">
-    <%= render "partials/card", 
-        title:'Mes rendez-vous', 
-        lines:[
-            'Gérer les rendez-vous que vous avez pris'
-        ], 
-        links:[
-            {href:my_meets_path, text:'Voir mes rendez-vous'}
-        ] 
-    %>
-    <%= render "partials/card", 
-        title:'Prendre rendez-vous', 
-        lines:[
-            'Prendre rendez-vous pour un service'
-        ], 
-        links:[
-            {href:customer_services_path, text:'Voir les services'}
-        ] 
-    %>
-</ul>
+    <% @meets_incoming.each do |meet| %>
+        <%= render meet %>
+    <% end %>
+</div>
 
 
 

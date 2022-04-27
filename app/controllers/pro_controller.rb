@@ -3,11 +3,9 @@ class ProController < ApplicationController
 
     def index
         @user = current_user
-        # if current_user
-        #     redirect_to({ action: "show", id: current_user.id})
-        # else
-        #     render "index"
-        # end
+        if current_user && current_user.is_pro
+            @meets_incoming = current_user.pro_meets.incoming
+        end
     end
 
     def show

@@ -1,13 +1,19 @@
-class MeetsController < ApplicationController
+class AgendaController < ApplicationController
   before_action :set_meet, only: %i[ show edit update destroy ]
 
-  # GET /meets or /meets.json
+  # GET /pro/agenda or /pro/agenda.json
+  # retourne les dates qui concernent les services de l'utilisateur connecté (qui est pro)
   def index
-    @meets = current_user.meets.to_come.order(:planned_at)
+    # @meets = current_user.services.map { |service| service.meets }
+    # @meets = @meets.flatten
+    # @meets = @meets.sort_by! {|u| u.planned_at_timestamp}
+    # @meets = current_user.pro_meets.order(:planned_at)
+    # @meets = current_user.pro_meets.where(planned_at: (Date.today)..(Date.today+1.month) ).order(:planned_at)
+    @meets = current_user.pro_meets.to_come.order(:planned_at)
   end
 
   def index_old
-    @meets = current_user.meets.old.order(:planned_at)
+    @meets = current_user.pro_meets.old.order(:planned_at)
   end
 
   # GET /meets/1 or /meets/1.json

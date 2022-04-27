@@ -29,14 +29,17 @@
     </div>
 
     <div class="col-12 mt-5">
-        <h2 class="mb-2">Mon agenda</h2>
-        <p>Rendez-vous que les clients ont pris avec vous</p>
-        <%= link_to "Voir l\'agenda", agenda_path, class:"mb-2 btn btn-primary" %>
+        <h2 class="mb-2">Mes prochains rendez-vous</h2>
+        <%= link_to "Tout voir", agenda_path, class:"mb-2 btn btn-secondary" %>
     </div>
+    <% @meets_incoming.each do |meet| %>
+        <%= render meet %>
+    <% end %>
+
 
     <div class="col-12 mt-5">
         <h2 class="mb-2">Mes services</h2>
-        <%= link_to "Nouveau service", new_service_path, class:"mb-2 btn btn-primary" %>
+        <%= link_to "Nouveau service", new_service_path, class:"mb-2 btn btn-secondary" %>
     </div>
     <% @user.services.each do |service| %>
         <div class="col-sm-6 col-lg-4  pb-4">

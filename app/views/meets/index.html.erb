@@ -1,9 +1,7 @@
-<h1>Agenda</h1>
-
+<h1 class="mb-2">Mes rendez-vous</h1>
+<%= link_to 'Rendez-vous passés', my_meets_old_path, class: 'mb-3 btn btn-secondary' %>
 <div class="row" id="meets">
   <% @meets.each do |meet| %>
     <%= render meet %>
   <% end %>
 </div>
-
-<%= link_to "New meet", new_meet_path %>

@@ -1,0 +1,7 @@
+<h1 class="mb-2">Agenda professionnel (anciens rendez-vous)</h1>
+<%= link_to 'Voir les rendez-vous actuels', agenda_path, class: 'mb-3 btn btn-secondary' %>
+<div class="row" id="meets">
+  <% @meets.each do |meet| %>
+    <%= render meet %>
+  <% end %>
+</div>

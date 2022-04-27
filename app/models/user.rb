@@ -5,5 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :services
   has_many :meets
+  has_many :pro_meets, through: :services, source: :meets
 
 end
