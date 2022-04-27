@@ -1,24 +1,20 @@
 class ProController < ApplicationController
-    before_action :set_user, only: %i[ show edit update destroy ]
+    before_action :set_user, only: %i[ index edit update destroy ]
 
     def index
-        @user = current_user
         if current_user && current_user.is_pro
             @meets_incoming = current_user.pro_meets.incoming
         end
     end
 
     def show
-        set_user
+        @user = User.find_by!(id: params[:id], is_pro: true)
     end
 
     def edit
-        @user = current_user
     end
 
     def update
-        @user = current_user
-
         respond_to do |format|
             if @user.update(user_params)
               format.html { redirect_to pro_path, notice: "Votre profil a été modifié avec succès" }
@@ -34,11 +30,11 @@ class ProController < ApplicationController
     private
         # Use callbacks to share common setup or constraints between actions.
         def set_user
-            @user = User.find_by!(id: params[:id], is_pro: true)
+            @user = current_user
         end
 
         # Only allow a list of trusted parameters through.
         def user_params
-            params.require(:user).permit(:name, :profession, :description, :site, :contact)
+            params.require(:user).permit(:name, :profession, :description, :site, :contact, :adress)
         end
 end 

@@ -6,6 +6,15 @@ $secondary:  #d9e5fb;
 $body-bg: #f2f2f4;
 $input-border-color: #adb5bd;
 
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+);
 
 $enable-negative-margins: true;
 
@@ -52,6 +61,11 @@ $card-border-radius: $border-radius-lg;
 $card-border-width: 0;
 $card-border-color: transparent;
 
+$accordion-bg: transparent;
 
 $dropdown-border-width: 0;
 $dropdown-border-color: transparent;
+
+$alert-padding-y: $spacer * 0.8;
+$alert-padding-x: $spacer * 1.3;
+$alert-border-width: 0;

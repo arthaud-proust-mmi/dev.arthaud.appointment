@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Professionnel</h5>
+        <%= link_to user.name, show_pro_path(user) %>
+        <% if current_user && current_user.id == user.id %>
+            (vous)
+        <% end %>
+    </div>
+    <div class="card-body">
+        <h5>Contact</h5> 
+        <%= user.contact %>
+    </div>
+    <div class="card-body">
+        <h5>Adresse</h5> 
+        <%= link_to user.adress, user.adress_to_maps, target:'_blank', rel:'noreferrer' %>
+    </div>
+    <div class="card-body">
+        <h5>Site</h5> 
+        <%= link_to user.site, "https://"+user.site, target:'_blank', rel:'noreferrer' %>
+    </div>
+</div>

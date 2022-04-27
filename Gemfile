@@ -50,6 +50,8 @@ gem 'simple_form'
 gem 'devise'
 gem 'devise-i18n'
 
+gem 'rails-i18n', '~> 7.0.0'
+
 gem 'bootstrap', '~> 5.1', '>= 5.1.3'
 
 gem 'figaro'

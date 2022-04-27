@@ -1,1 +1,1 @@
-json.array! @service.user.meets
+json.array! @service.user.pro_meets.confirmed.pluck(:planned_at)

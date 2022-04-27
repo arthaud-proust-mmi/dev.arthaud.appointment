@@ -1,5 +1,5 @@
 class MeetsController < ApplicationController
-  before_action :set_meet, only: %i[ show edit update destroy ]
+  before_action :set_meet, only: %i[ show edit update destroy cancel ]
 
   # GET /meets or /meets.json
   def index
@@ -9,6 +9,8 @@ class MeetsController < ApplicationController
   def index_old
     @meets = current_user.meets.old.order(:planned_at)
   end
+
+
 
   # GET /meets/1 or /meets/1.json
   def show
@@ -49,6 +51,18 @@ class MeetsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @meet.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def cancel
+    respond_to do |format|
+        if @meet.update(state: Meet::STATES[:canceled])
+            format.html { redirect_to meet_url(@meet), notice: "Le rendez-vous a été annulé avec succès" }
+            format.json { render :show, status: :ok, location: @meet }
+        else
+            format.html { render :edit, status: :unprocessable_entity }
+            format.json { render json: @meet.errors, status: :unprocessable_entity }
+        end
     end
   end
 

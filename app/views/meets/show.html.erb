@@ -1,8 +1,44 @@
-<%= render "meet", meet: @meet %>
+<div class="row">
+    <h1 class="col-12">Rendez-vous</h1>
+    <div class="col-md-6">
+        <div class="card">
+            <% if @meet.is_canceled %>
+                <div class="card-header bg-danger text-light">
+                    Rendez-vous annulé
+                </div>
+            <% end %>
+            
+            <div class="card-body">
+                <h5 class="card-title">
+                    Le <%= l(@meet.planned_at, :format => '%d %B %Y') %>
+                </h5>
 
-<div>
-  <%= link_to "Edit this meet", edit_meet_path(@meet) %> |
-  <%= link_to "Back to meets", my_meets_path %>
+                
+                <ul class="list-unstyled">
+                    <li>
+                        Service: <%= link_to @meet.service.title, service_path(@meet.service_id) %>
+                    </li>
+                    
+                </ul>
 
-  <%= button_to "Destroy this meet", @meet, method: :delete %>
+                <% if !@meet.is_canceled && !@meet.is_old %>
+                    <h5>Actions</h5>
+                    <div class="d-flex flex-row flex-wrap gap-2">
+                        <% if current_user && current_user.id != @meet.service.user.id %>
+                            <%= link_to "Modifier la date", edit_meet_path(@meet), class:'btn btn-outline-primary' %>
+                        <% end %>
+                            <%= button_to "Annuler le rendez-vous", cancel_meet_path, method: :post, class:'btn btn-outline-danger' %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <% if current_user && current_user.id == @meet.service.user.id %>
+            <%= render 'users/client_card', user: @meet.user %>
+        <% else %>
+            <%= render 'users/pro_card', user: @meet.service.user %>
+        <% end %>
+    </div>
 </div>

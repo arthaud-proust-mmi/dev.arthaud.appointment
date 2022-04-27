@@ -3,7 +3,7 @@
 <div class="row" id="services">
     <% @services.each do |service| %>
         <div class="col-sm-6 col-lg-4  pb-4">
-            <%= render service %>
+            <%= render service, actions: true %>
         </div>
     <% end %>
 </div>

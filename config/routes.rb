@@ -10,13 +10,15 @@ Rails.application.routes.draw do
   }, :controllers => { registrations: 'users/registrations' }
 
   resources :meets, except: [:index]
+  post '/meets/:id/cancel', to: 'meets#cancel', as: :cancel_meet
+  get '/my-meets', to: 'meets#index', as: :my_meets
+  get '/my-meets/old', to: 'meets#index_old', as: :my_meets_old
 
   scope '/pro' do
     get '/', to: 'pro#index', as: :pro
     get '/edit', to: 'pro#edit', as: :edit_pro
     patch '/edit', to: 'pro#update', as: :update_pro
     resources :services, except: [:index]
-    get '/services', to: 'services#index_self', as: :services_self
     get '/agenda', to: 'agenda#index', as: :agenda
     get '/agenda/old', to: 'agenda#index_old', as: :agenda_old
     get '/:id', to: 'pro#show', as: :show_pro
@@ -24,8 +26,7 @@ Rails.application.routes.draw do
   end
 
 
-  get '/my-meets', to: 'meets#index', as: :my_meets
-  get '/my-meets/old', to: 'meets#index_old', as: :my_meets_old
+ 
   
   get '/services', to: 'services#index', as: :customer_services
   get '/services/:id', to: 'services#show', as: :customer_service

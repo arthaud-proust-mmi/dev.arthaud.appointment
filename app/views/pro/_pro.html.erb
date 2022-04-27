@@ -9,12 +9,17 @@
             <div class="card-body">
                 <h2 class="h5 card-title"><%= @user.name %></h2>
                 <h3 class="h6 card-subtitle mb-2 text-muted"><%= @user.profession || "Profession non renseignée" %></h3>
-                <% if @user.contact %>
-                    <p><%= @user.contact %></p>
-                <% end %>
-                <% if @user.site %>
-                    <a href="https://<%= @user.site %>" class="card-link"><%= @user.site %></a>
-                <% end %>
+                <ul class="list-unstyled">
+                    <% if @user.contact %>
+                        <li><%= @user.contact %></li>
+                    <% end %>
+                    <% if @user.adress %>
+                        <li><%= link_to @user.adress, @user.adress_to_maps, rel:'noreferrer', target:'_blank' %></li>
+                    <% end %>
+                    <% if @user.site %>
+                        <li><%= link_to @user.site, "https://"+@user.site, rel:'noreferrer', target:'_blank' %></li>
+                    <% end %>
+                </ul>
             </div>
 
         </div>
@@ -43,7 +48,7 @@
     </div>
     <% @user.services.each do |service| %>
         <div class="col-sm-6 col-lg-4  pb-4">
-            <%= render "services/service", service: service, hide_user:true, own: true %>
+            <%= render "services/service", service: service, actions: true, hide_user:true, own: true %>
         </div>
     <% end %>
 </div>

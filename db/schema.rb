@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_26_150326) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_27_183148) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_26_150326) do
     t.date "planned_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "state", default: 0
     t.index ["service_id"], name: "index_meets_on_service_id"
     t.index ["user_id"], name: "index_meets_on_user_id"
   end
@@ -49,6 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_26_150326) do
     t.string "profession"
     t.string "contact"
     t.string "site"
+    t.string "adress"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["is_pro"], name: "index_users_on_is_pro"
     t.index ["name"], name: "index_users_on_name", unique: true

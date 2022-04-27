@@ -1,13 +1,31 @@
 <div class="col-sm-6 col-lg-4 mb-4">
-  <div class="card" id="<%= dom_id meet %>">
-    <div class="card-body">
-      <h5 class="card-title">
-        <%= meet.planned_at %>
-      </h5>
-      <h6 class="card-subtitle mb-2 text-muted">
-        Service <%= link_to meet.service.title, service_path(meet.service_id) %>
-      </h6>
-      <!-- <%= link_to "Voir", meet, class:'btn btn-primary' %>-->
+    <div class="card" id="<%= dom_id meet %>">
+        <% if meet.is_canceled %>
+            <div class="card-header bg-danger text-light">
+                <strong><%= l(meet.planned_at, :format => '%d %B %Y') %> - Annulé</strong>
+            </div>
+        <% else %>
+            <div class="card-header">
+                <strong><%= l(meet.planned_at, :format => '%d %B %Y') %></strong>
+            </div>
+        <% end %>
+        <div class="card-body">
+            <h5 class="card-title">
+                <% if current_user && current_user.id == meet.service.user.id %>
+                    <%= meet.user.name %>
+                <% else %>
+                    <%= meet.service.user.name %>
+                <% end %>
+            </h5>
+            <p><%= link_to meet.service.title, service_path(meet.service_id) %><p>
+            
+            <div class="d-flex flex-row flex-wrap gap-2">
+                <%= link_to "Voir", meet, class:'btn btn-primary' %>
+                <% if meet.is_canceled %>
+                    <%= link_to "Prendre un autre rendez-vous", customer_book_service_path(meet.service), class:'btn btn-primary' %>
+                <% end %> 
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>

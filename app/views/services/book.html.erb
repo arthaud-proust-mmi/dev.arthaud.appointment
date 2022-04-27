@@ -28,12 +28,14 @@
         
         <div class="col-sm-12 col-md-5 col-lg-4 offset-lg-1 pb-4" id="resume">
             <h3 class="pb-2">Résumé</h3>
-            <%= render "services/service_summary", service: @service, no_action: true %>
+            <%= render "services/service_summary", service: @service %>
 
-            <div id="datepicked" class="mt-2 bg-light p-3 rounded">
-                <h5>Date de réservation</h5>
-                <span id="datepicked-date">Aucune date choisie</span>
-                <a id="datepicked-modify" class="d-none d-md-none text-decoration-none" style="cursor: pointer">Modifier</a>
+            <div id="datepicked" class="card mt-2">
+                <div class="card-body">
+                    <h5>Date de réservation</h5>
+                    <span id="datepicked-date">Aucune date choisie</span>
+                    <a id="datepicked-modify" class="d-none d-md-none text-decoration-none" style="cursor: pointer">Modifier</a>
+                </div>
             </div> 
             <%= form.submit "Confirmer", class: 'col-12 mt-2 btn btn-secondary', id:'submitBtn', disabled:true %>
 
@@ -50,25 +52,19 @@
     const calendar = document.getElementById('calendar');
 
     fetch(fetchDatesUrl).then(function(response) {
-    return response.json();
+        return response.json();
     })
-    .then(function(takenDatesObjs) {
-        console.log(takenDatesObjs);
+    .then(function(takenDates) {
         const datesDisabled = [];
-        for(let i=0; i<=takenDatesObjs.length-1; i++) {
-            console.log(takenDatesObjs[i].planned_at);
-            const d = new Date(takenDatesObjs[i].planned_at);
+        for(let i=0; i<=takenDates.length-1; i++) {
+            const d = new Date(takenDates[i]);
             const day = d.getDate().toString().padStart(2, "0")
             const month = (d.getMonth()+1).toString().padStart(2, "0")
             const year = d.getFullYear()
             const formated = `${day}/${month}/${year}`;
 
-            console.log(formated)
             datesDisabled.push(formated)
         }
-
-        console.log(datesDisabled)
-
 
         $.fn.datepicker.dates['fr'] = {
             days: ["Dimanche", "Lundi", "Madri", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
@@ -151,7 +147,7 @@
     }
 
     .day {
-        background: #f9f9f9;
+        background: #fbfbfb;
         border-radius: 0 !important;
     }
     .day.today {

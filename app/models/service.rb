@@ -7,7 +7,4 @@ class Service < ApplicationRecord
     validates :title, presence: { message: 'Le titre est obligatoire' }
     validates :price, presence: { message: 'Le prix est obligatoire' }
     validates :unit, presence: { message: 'L\'unité est obligatoire' }
-
-
-
 end

@@ -17,9 +17,9 @@
                 /<%= service.unit %>
             </small>
         </p>
-        <% if not defined? no_action %>
+        <% if (defined? actions) && actions %>
             <% if (defined? own) and own %>
-                <%= link_to "Éditer", edit_service_path(service), class:'btn btn-secondary' %>
+                <%= link_to "Éditer", edit_service_path(service), class:'btn btn-primary' %>
             <% else %>
                 <%= link_to "Prendre rendez-vous", customer_book_service_path(service), class:'btn btn-primary' %>
             <% end %>
