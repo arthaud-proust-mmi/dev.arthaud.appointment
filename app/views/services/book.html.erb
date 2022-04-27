@@ -87,6 +87,7 @@
             todayHighlight: false,
             language: 'fr',
             datesDisabled,
+            startDate: new Date(Date.now()),
             templates: {
                 leftArrow: '<i class="fa fa-angle-left"></i>',
                 rightArrow: '<i class="fa fa-angle-right"></i>'
@@ -120,6 +121,19 @@
     .datepicker-days > table {
         width: 100%
     }
+    .datepicker-days > table > tbody > tr:first-child > td:first-child {
+        border-top-left-radius: 0.5rem !important;
+    }
+    .datepicker-days > table > tbody > tr:first-child > td:last-child {
+        border-top-right-radius: 0.5rem !important;
+    }
+
+    .datepicker-days > table > tbody > tr:last-child > td:first-child {
+        border-bottom-left-radius: 0.5rem !important;
+    }
+    .datepicker-days > table > tbody > tr:last-child > td:last-child {
+        border-bottom-right-radius: 0.5rem !important;
+    }
     .datepicker.datepicker-inline {
         width: auto !important;
         border: 1px solid #eee;
@@ -137,16 +151,19 @@
     }
 
     .day {
+        background: #f9f9f9;
+        border-radius: 0 !important;
     }
     .day.today {
         background: #fde19a;
         background-image: none !important;
     }
     .day.active {
+        border-radius: 0.25rem !important;
         background: #04c;
         background-image: none !important;
     }
-    .day.disabled.disabled-date {
+    .day.disabled {
         background: #eee;
     }
 </style>
