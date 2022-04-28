@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+    prepend_before_action :authenticate_user!, only: %i[ show ]
     def index
     end
 

@@ -40,7 +40,7 @@
     </div>
     <% @user.services.each do |service| %>
         <div class="col-sm-6 col-lg-4  pb-4">
-            <%= render "services/service", service: service, hide_user:true %>
+            <%= render "services/service", service: service, hide_user:true, actions: (!current_user or (current_user.id != service.user.id)) %>
         </div>
     <% end %>
 </div>

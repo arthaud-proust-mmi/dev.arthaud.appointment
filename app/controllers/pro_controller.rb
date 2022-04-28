@@ -1,5 +1,7 @@
 class ProController < ApplicationController
-    before_action :set_user, only: %i[ index edit update destroy ]
+    prepend_before_action :authenticate_user!, only: %i[ edit update ]
+    before_action :set_user, only: %i[ index edit update ]
+    before_action :pro_user, only: %i[ edit update ]
 
     def index
         if current_user && current_user.is_pro
@@ -17,11 +19,11 @@ class ProController < ApplicationController
     def update
         respond_to do |format|
             if @user.update(user_params)
-              format.html { redirect_to pro_path, notice: "Votre profil a été modifié avec succès" }
-              format.json { render :show, status: :ok, location: @user }
+                format.html { redirect_to pro_path, notice: "Votre profil a été modifié avec succès" }
+                format.json { render :show, status: :ok, location: @user }
             else
-              format.html { render :edit, status: :unprocessable_entity }
-              format.json { render json: @user.errors, status: :unprocessable_entity }
+                format.html { render :edit, status: :unprocessable_entity }
+                format.json { render json: @user.errors, status: :unprocessable_entity }
             end
         end
     end
@@ -36,5 +38,12 @@ class ProController < ApplicationController
         # Only allow a list of trusted parameters through.
         def user_params
             params.require(:user).permit(:name, :profession, :description, :site, :contact, :adress).merge(slug: params.require(:user)[:name].parameterize)
+        end
+
+        def pro_user
+            unless current_user.is_pro
+                flash[:alert] = "Vous n'avez pas indiqué être professionnel dans votre compte"
+                redirect_to pro_path
+            end
         end
 end 
